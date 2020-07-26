@@ -10,4 +10,4 @@ I have developed this application for learning purpose only I have used https://
 2. Run project as
 
 > python manage.py runserver
- 
+ z
