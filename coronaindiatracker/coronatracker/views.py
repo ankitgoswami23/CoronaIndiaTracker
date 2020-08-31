@@ -3,9 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# Create your views here.
 def corona_data(request):
-    corona_info = []
     corona_html = requests.get("https://www.mygov.in/covid-19")
     soup = BeautifulSoup(corona_html.content, 'html.parser')
     state_wise_data = soup.find_all('div', class_='views-row')
@@ -16,19 +14,19 @@ def corona_data(request):
         'discharge': information.find('div', class_='discharge').find('span', class_='icount').string,
         'death': information.find('div', class_='death_case').find('span', class_='icount').string
     }
-    for state in state_wise_data:
-        corona_info.append({
+    corona_info = [
+        {
             "state_name": state.find_all('span', class_='st_name')[0].string,
             "confirm_case": state.find_all('div', class_='tick-confirmed')[0].find_all('small')[0].string,
             "active_case": state.find_all('div', class_='tick-active')[0].find_all('small')[0].string,
             "discharge": state.find_all('div', class_='tick-discharged')[0].find_all('small')[0].string,
             "death": state.find_all('div', class_='tick-death')[0].find_all('small')[0].string
-        })
-    corona_info = sorted(corona_info, key=lambda i: int(''.join(i['confirm_case'].replace(',', ''))), reverse=True)
+        } for state in state_wise_data
+    ]
 
     context = {
         'corona_info': info,
-        'data': corona_info
+        'data': sorted(corona_info, key=lambda i: int(''.join(i['confirm_case'].replace(',', ''))), reverse=True)
     }
 
     return render(request, 'coronainfo/index.html', context)
