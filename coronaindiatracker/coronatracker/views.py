@@ -14,6 +14,7 @@ def corona_data(request):
         'discharge': information.find('div', class_='discharge').find('span', class_='icount').string,
         'death': information.find('div', class_='death_case').find('span', class_='icount').string
     }
+
     corona_info = [
         {
             "state_name": state.find_all('span', class_='st_name')[0].string,
