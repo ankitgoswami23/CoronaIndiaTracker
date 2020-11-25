@@ -4,7 +4,9 @@ from bs4 import BeautifulSoup
 
 
 def corona_data(request):
-    "Yahoo"
+
+    "test"
+
     corona_html = requests.get("https://www.mygov.in/covid-19")
     soup = BeautifulSoup(corona_html.content, 'html.parser')
     state_wise_data = soup.find_all('div', class_='views-row')
