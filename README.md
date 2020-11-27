@@ -1,4 +1,4 @@
-# CoronaIndiaTracker
+# CoronaIndiaTrackera
 India Corona Case Tracker
 
 I have developed this application for learning purpose only I have used https://www.mygov.in/covid-19 data source and display it using Python and Django.
